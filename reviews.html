@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews Management | Savera Retreat Admin</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .review-card {
+            padding: 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            gap: 20px;
+        }
+        .review-card:last-child {
+            border-bottom: none;
+        }
+        .review-content {
+            flex-grow: 1;
+        }
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .reviewer-name {
+            font-weight: 600;
+        }
+        .review-date {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        .stars {
+            color: #F6AD55; /* Gold */
+            display: flex;
+            gap: 2px;
+            margin-bottom: 12px;
+        }
+        .stars i { fill: #F6AD55; }
+        .review-text {
+            color: var(--text-main);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .review-reply {
+            background-color: var(--bg-main);
+            padding: 16px;
+            border-radius: var(--border-radius-sm);
+            border-left: 3px solid var(--primary);
+            margin-top: 16px;
+        }
+        .reply-header {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="brand-logo">
+                    <i data-lucide="leaf"></i>
+                    <span class="brand-text">Savera Retreat</span>
+                </a>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <div class="menu-label">Overview</div>
+                <a href="index.html" class="menu-item">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span class="menu-text">Dashboard</span>
+                </a>
+                <a href="analytics.html" class="menu-item">
+                    <i data-lucide="bar-chart-3"></i>
+                    <span class="menu-text">Analytics</span>
+                </a>
+
+                <div class="menu-label">Management</div>
+                <a href="bookings.html" class="menu-item">
+                    <i data-lucide="calendar-check"></i>
+                    <span class="menu-text">Bookings</span>
+                </a>
+                <a href="calendar.html" class="menu-item">
+                    <i data-lucide="calendar-days"></i>
+                    <span class="menu-text">Calendar</span>
+                </a>
+                <a href="customers.html" class="menu-item">
+                    <i data-lucide="users"></i>
+                    <span class="menu-text">Customers</span>
+                </a>
+
+                <div class="menu-label">Interactions</div>
+                <a href="inquiries.html" class="menu-item">
+                    <i data-lucide="message-square"></i>
+                    <span class="menu-text">Inquiries</span>
+                </a>
+                <a href="reviews.html" class="menu-item active">
+                    <i data-lucide="star"></i>
+                    <span class="menu-text">Reviews</span>
+                </a>
+
+                <div class="menu-label">System</div>
+                <a href="settings.html" class="menu-item">
+                    <i data-lucide="settings"></i>
+                    <span class="menu-text">Settings</span>
+                </a>
+                <a href="login.html" class="menu-item">
+                    <i data-lucide="log-out"></i>
+                    <span class="menu-text">Logout</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="toggle-sidebar" id="toggle-sidebar"><i data-lucide="menu"></i></button>
+                    <div class="search-bar">
+                        <i data-lucide="search"></i>
+                        <input type="text" placeholder="Search reviews...">
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-content">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Reviews Management</h1>
+                        <p class="page-subtitle">View and respond to customer feedback.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="review-card">
+                        <img src="https://ui-avatars.com/api/?name=Vikas+Mehta" style="width: 48px; height: 48px; border-radius: 50%;">
+                        <div class="review-content">
+                            <div class="review-header">
+                                <span class="reviewer-name">Vikas Mehta</span>
+                                <span class="review-date">2 days ago via Google Maps</span>
+                            </div>
+                            <div class="stars">
+                                <i data-lucide="star" width="16"></i><i data-lucide="star" width="16"></i><i data-lucide="star" width="16"></i><i data-lucide="star" width="16"></i><i data-lucide="star" width="16"></i>
+                            </div>
+                            <p class="review-text">Absolutely stunning property! We hosted a family get-together here and the arrangements were flawless. The huge lawn and open veranda by the pool are perfect for events. Highly recommend!</p>
+                            
+                            <div class="review-reply">
+                                <div class="reply-header">Your Reply</div>
+                                <p style="font-size: 0.9rem; color: var(--text-main);">Thank you so much Vikas! We are thrilled you enjoyed the family get-together. We hope to host you again soon.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="review-card">
+                        <img src="https://ui-avatars.com/api/?name=Anjali+Roy" style="width: 48px; height: 48px; border-radius: 50%;">
+                        <div class="review-content">
+                            <div class="review-header">
+                                <span class="reviewer-name">Anjali Roy</span>
+                                <span class="review-date">1 week ago via Website</span>
+                            </div>
+                            <div class="stars">
+                                <i data-lucide="star" width="16"></i><i data-lucide="star" width="16"></i><i data-lucide="star" width="16"></i><i data-lucide="star" width="16"></i><i data-lucide="star" width="16" style="fill:none; color: #cbd5e1"></i>
+                            </div>
+                            <p class="review-text">Great staycation spot near Nagpur. The villa is luxurious and well maintained. Only suggestion is to add more options to the pre-ordered food menu.</p>
+                            
+                            <button class="btn btn-secondary" style="margin-top: 8px;"><i data-lucide="message-circle" width="16"></i> Reply to review</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>

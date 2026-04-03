@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics | Savera Retreat Admin</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+        @media (max-width: 1024px) {
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="brand-logo">
+                    <i data-lucide="leaf"></i>
+                    <span class="brand-text">Savera Retreat</span>
+                </a>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <div class="menu-label">Overview</div>
+                <a href="index.html" class="menu-item">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span class="menu-text">Dashboard</span>
+                </a>
+                <a href="analytics.html" class="menu-item active">
+                    <i data-lucide="bar-chart-3"></i>
+                    <span class="menu-text">Analytics</span>
+                </a>
+
+                <div class="menu-label">Management</div>
+                <a href="bookings.html" class="menu-item">
+                    <i data-lucide="calendar-check"></i>
+                    <span class="menu-text">Bookings</span>
+                </a>
+                <a href="calendar.html" class="menu-item">
+                    <i data-lucide="calendar-days"></i>
+                    <span class="menu-text">Calendar</span>
+                </a>
+                <a href="customers.html" class="menu-item">
+                    <i data-lucide="users"></i>
+                    <span class="menu-text">Customers</span>
+                </a>
+
+                <div class="menu-label">Interactions</div>
+                <a href="inquiries.html" class="menu-item">
+                    <i data-lucide="message-square"></i>
+                    <span class="menu-text">Inquiries</span>
+                </a>
+                <a href="reviews.html" class="menu-item">
+                    <i data-lucide="star"></i>
+                    <span class="menu-text">Reviews</span>
+                </a>
+
+                <div class="menu-label">System</div>
+                <a href="settings.html" class="menu-item">
+                    <i data-lucide="settings"></i>
+                    <span class="menu-text">Settings</span>
+                </a>
+                <a href="login.html" class="menu-item">
+                    <i data-lucide="log-out"></i>
+                    <span class="menu-text">Logout</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="toggle-sidebar" id="toggle-sidebar">
+                        <i data-lucide="menu"></i>
+                    </button>
+                    <div class="search-bar">
+                        <i data-lucide="search"></i>
+                        <input type="text" placeholder="Search analytics...">
+                    </div>
+                </div>
+                
+                <div class="topbar-right">
+                    <button class="topbar-btn" id="theme-toggle"><i data-lucide="moon"></i></button>
+                    <div class="profile-dropdown">
+                        <img src="https://ui-avatars.com/api/?name=Admin+User&background=4A5D23&color=fff" alt="Admin" class="avatar">
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-content">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Analytics & Reports</h1>
+                        <p class="page-subtitle">Deep dive into revenue, booking sources, and website traffic.</p>
+                    </div>
+                    <div class="action-buttons">
+                        <select class="form-control" style="width: auto;">
+                            <option>Last 30 Days</option>
+                            <option>This Year</option>
+                            <option>All Time</option>
+                        </select>
+                        <button class="btn btn-secondary">
+                            <i data-lucide="download"></i> Download PDF
+                        </button>
+                    </div>
+                </div>
+
+                <div class="analytics-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Booking Conversion Rate</h2>
+                        </div>
+                        <div class="card-body" style="padding: 24px;">
+                            <canvas id="conversionChart" height="250"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Revenue by Source</h2>
+                        </div>
+                        <div class="card-body" style="padding: 24px;">
+                            <canvas id="sourceChart" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Website Visitors (Last 7 Days)</h2>
+                    </div>
+                    <div class="card-body" style="padding: 24px;">
+                        <canvas id="visitorsChart" height="150"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const docStyle = getComputedStyle(document.documentElement);
+            const primaryColor = docStyle.getPropertyValue('--primary').trim() || '#4A5D23';
+            const secondaryColor = docStyle.getPropertyValue('--secondary').trim() || '#C39B71';
+            const textColor = docStyle.getPropertyValue('--text-main');
+            
+            Chart.defaults.color = textColor;
+            Chart.defaults.font.family = "'Outfit', sans-serif";
+
+            // Conversion Chart (Bar)
+            new Chart(document.getElementById('conversionChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Website', 'Instagram', 'Referral', 'Walk-in'],
+                    datasets: [{
+                        label: 'Inquiries',
+                        data: [150, 100, 40, 10],
+                        backgroundColor: 'rgba(200, 200, 200, 0.5)'
+                    }, {
+                        label: 'Converted',
+                        data: [35, 15, 25, 8],
+                        backgroundColor: primaryColor
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+
+            // Source Chart (Pie)
+            new Chart(document.getElementById('sourceChart'), {
+                type: 'pie',
+                data: {
+                    labels: ['Direct Booking', 'Corporate Tie-ups', 'Event Planners'],
+                    datasets: [{
+                        data: [65, 20, 15],
+                        backgroundColor: [primaryColor, secondaryColor, '#3182CE']
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+
+            // Visitors Chart (Line)
+            new Chart(document.getElementById('visitorsChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Page Views',
+                        data: [120, 150, 140, 210, 320, 450, 410],
+                        borderColor: secondaryColor,
+                        backgroundColor: 'rgba(195, 155, 113, 0.1)',
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+        });
+    </script>
+</body>
+</html>

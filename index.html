@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Overview | Savera Retreat Admin</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Chart.js for Mock Data -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="brand-logo">
+                    <i data-lucide="leaf"></i>
+                    <span class="brand-text">Savera Retreat</span>
+                </a>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <div class="menu-label">Overview</div>
+                <a href="index.html" class="menu-item active">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span class="menu-text">Dashboard</span>
+                </a>
+                <a href="analytics.html" class="menu-item">
+                    <i data-lucide="bar-chart-3"></i>
+                    <span class="menu-text">Analytics</span>
+                </a>
+
+                <div class="menu-label">Management</div>
+                <a href="bookings.html" class="menu-item">
+                    <i data-lucide="calendar-check"></i>
+                    <span class="menu-text">Bookings</span>
+                </a>
+                <a href="calendar.html" class="menu-item">
+                    <i data-lucide="calendar-days"></i>
+                    <span class="menu-text">Calendar</span>
+                </a>
+                <a href="customers.html" class="menu-item">
+                    <i data-lucide="users"></i>
+                    <span class="menu-text">Customers</span>
+                </a>
+
+                <div class="menu-label">Interactions</div>
+                <a href="inquiries.html" class="menu-item">
+                    <i data-lucide="message-square"></i>
+                    <span class="menu-text">Inquiries</span>
+                </a>
+                <a href="reviews.html" class="menu-item">
+                    <i data-lucide="star"></i>
+                    <span class="menu-text">Reviews</span>
+                </a>
+
+                <div class="menu-label">System</div>
+                <a href="settings.html" class="menu-item">
+                    <i data-lucide="settings"></i>
+                    <span class="menu-text">Settings</span>
+                </a>
+                <a href="login.html" class="menu-item">
+                    <i data-lucide="log-out"></i>
+                    <span class="menu-text">Logout</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="toggle-sidebar" id="toggle-sidebar">
+                        <i data-lucide="menu"></i>
+                    </button>
+                    <div class="search-bar">
+                        <i data-lucide="search"></i>
+                        <input type="text" placeholder="Search bookings, guests, or actions...">
+                    </div>
+                </div>
+                
+                <div class="topbar-right">
+                    <button class="topbar-btn" id="theme-toggle">
+                        <i data-lucide="moon"></i>
+                    </button>
+                    <button class="topbar-btn">
+                        <i data-lucide="bell"></i>
+                        <span class="badge">3</span>
+                    </button>
+                    <div class="profile-dropdown">
+                        <img src="https://ui-avatars.com/api/?name=Admin+User&background=4A5D23&color=fff" alt="Admin" class="avatar">
+                        <div class="profile-info">
+                            <span class="profile-name">Savera Admin</span>
+                            <span class="profile-role">Superadmin</span>
+                        </div>
+                        <i data-lucide="chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Dashboard Overview</h1>
+                        <p class="page-subtitle">Welcome back! Here's what's happening at Savera Retreat today.</p>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-secondary">
+                            <i data-lucide="download"></i> Export Report
+                        </button>
+                        <button class="btn btn-primary" onclick="window.location.href='bookings.html'">
+                            <i data-lucide="plus"></i> New Booking
+                        </button>
+                    </div>
+                </div>
+
+                <!-- KPI Cards -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span>Total Revenue (This Month)</span>
+                            <div class="kpi-icon primary">
+                                <i data-lucide="indian-rupee"></i>
+                            </div>
+                        </div>
+                        <div class="kpi-value">₹4,25,000</div>
+                        <div class="kpi-trend positive">
+                            <i data-lucide="trending-up" width="16"></i> +12.5% from last month
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span>Monthly Bookings</span>
+                            <div class="kpi-icon secondary">
+                                <i data-lucide="calendar-check"></i>
+                            </div>
+                        </div>
+                        <div class="kpi-value">28</div>
+                        <div class="kpi-trend positive">
+                            <i data-lucide="trending-up" width="16"></i> +4 new this week
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span>Occupancy Rate</span>
+                            <div class="kpi-icon info">
+                                <i data-lucide="pie-chart"></i>
+                            </div>
+                        </div>
+                        <div class="kpi-value">75%</div>
+                        <div class="kpi-trend positive">
+                            <i data-lucide="trending-up" width="16"></i> +5% from last month
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span>Pending Inquiries</span>
+                            <div class="kpi-icon warning">
+                                <i data-lucide="message-circle-question"></i>
+                            </div>
+                        </div>
+                        <div class="kpi-value" style="color: var(--warning)">12</div>
+                        <div class="kpi-trend negative">
+                            <i data-lucide="clock" width="16"></i> Needs attention
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Layout Grid for Charts and Tables -->
+                <div class="dashboard-grid">
+                    <!-- Revenue Chart Area -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Revenue Overview</h2>
+                            <button class="action-menu"><i data-lucide="more-horizontal"></i></button>
+                        </div>
+                        <div class="card-body" style="padding: 24px;">
+                            <canvas id="revenueChart" height="300"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Recent Inquiries / Notifications -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Booking Segmentation</h2>
+                        </div>
+                        <div class="card-body" style="padding: 24px; display: flex; justify-content: center; align-items: center; height: 350px;">
+                            <canvas id="segmentChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Bookings Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Upcoming Bookings</h2>
+                        <a href="bookings.html" class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.85rem;">View All</a>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Guest info</th>
+                                    <th>Check In</th>
+                                    <th>Check Out</th>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="user-cell">
+                                            <div class="profile-info">
+                                                <span class="profile-name">Rahul Sharma</span>
+                                                <span class="profile-role">+91 98765 43210</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>12 Oct 2026</td>
+                                    <td>14 Oct 2026</td>
+                                    <td>Staycation</td>
+                                    <td>₹50,000</td>
+                                    <td><span class="status-badge status-warning">Upcoming</span></td>
+                                    <td><button class="action-menu"><i data-lucide="more-vertical"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="user-cell">
+                                            <div class="profile-info">
+                                                <span class="profile-name">Priya Desai</span>
+                                                <span class="profile-role">+91 91234 56789</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>15 Oct 2026</td>
+                                    <td>16 Oct 2026</td>
+                                    <td>Wedding Setup</td>
+                                    <td>₹1,20,000</td>
+                                    <td><span class="status-badge status-warning">Upcoming</span></td>
+                                    <td><button class="action-menu"><i data-lucide="more-vertical"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="user-cell">
+                                            <div class="profile-info">
+                                                <span class="profile-name">Amit Patel</span>
+                                                <span class="profile-role">+91 99887 76655</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>08 Oct 2026</td>
+                                    <td>10 Oct 2026</td>
+                                    <td>Corporate Offsite</td>
+                                    <td>₹75,000</td>
+                                    <td><span class="status-badge status-success">Active</span></td>
+                                    <td><button class="action-menu"><i data-lucide="more-vertical"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- main js -->
+    <script src="js/script.js"></script>
+    
+    <!-- Chart logic specific to dashboard -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const documentStyle = getComputedStyle(document.documentElement);
+            const textColor = documentStyle.getPropertyValue('--text-main');
+            const gridColor = documentStyle.getPropertyValue('--border-color');
+            const primaryColor = documentStyle.getPropertyValue('--primary').trim() || '#4A5D23';
+            const secondaryColor = documentStyle.getPropertyValue('--secondary').trim() || '#C39B71';
+
+            // Revenue Chart
+            const ctxRev = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctxRev, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                    datasets: [{
+                        label: 'Revenue (₹)',
+                        data: [120000, 190000, 150000, 220000, 180000, 250000, 310000, 280000, 350000, 425000],
+                        borderColor: primaryColor,
+                        backgroundColor: 'rgba(74, 93, 35, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: gridColor },
+                            ticks: { color: textColor }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: textColor }
+                        }
+                    }
+                }
+            });
+
+            // Segment Chart
+            const ctxSeg = document.getElementById('segmentChart').getContext('2d');
+            new Chart(ctxSeg, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Staycation', 'Events/Parties', 'Corporate', 'Weddings'],
+                    datasets: [{
+                        data: [45, 25, 20, 10],
+                        backgroundColor: [
+                            primaryColor,
+                            secondaryColor,
+                            '#38A169',
+                            '#3182CE'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '75%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: textColor,
+                                usePointStyle: true,
+                                padding: 20
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

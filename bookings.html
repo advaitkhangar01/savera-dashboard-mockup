@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookings Management | Savera Retreat Admin</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .filter-bar {
+            padding: 16px 24px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+        }
+        .filter-select {
+            padding: 8px 12px;
+            border-radius: var(--border-radius-sm);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: inherit;
+        }
+        .tabs {
+            display: flex;
+            gap: 24px;
+            border-bottom: 1px solid var(--border-color);
+            padding: 0 24px;
+        }
+        .tab {
+            padding: 16px 0;
+            color: var(--text-muted);
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+        }
+        .tab:hover, .tab.active {
+            color: var(--primary);
+        }
+        .tab.active {
+            border-bottom-color: var(--primary);
+            font-weight: 600;
+        }
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            border-top: 1px solid var(--border-color);
+        }
+        .page-numbers {
+            display: flex;
+            gap: 8px;
+        }
+        .page-btn {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .page-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .page-btn:hover:not(.active) {
+            background-color: var(--bg-hover);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="brand-logo">
+                    <i data-lucide="leaf"></i>
+                    <span class="brand-text">Savera Retreat</span>
+                </a>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <div class="menu-label">Overview</div>
+                <a href="index.html" class="menu-item">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span class="menu-text">Dashboard</span>
+                </a>
+                <a href="analytics.html" class="menu-item">
+                    <i data-lucide="bar-chart-3"></i>
+                    <span class="menu-text">Analytics</span>
+                </a>
+
+                <div class="menu-label">Management</div>
+                <a href="bookings.html" class="menu-item active">
+                    <i data-lucide="calendar-check"></i>
+                    <span class="menu-text">Bookings</span>
+                </a>
+                <a href="calendar.html" class="menu-item">
+                    <i data-lucide="calendar-days"></i>
+                    <span class="menu-text">Calendar</span>
+                </a>
+                <a href="customers.html" class="menu-item">
+                    <i data-lucide="users"></i>
+                    <span class="menu-text">Customers</span>
+                </a>
+
+                <div class="menu-label">Interactions</div>
+                <a href="inquiries.html" class="menu-item">
+                    <i data-lucide="message-square"></i>
+                    <span class="menu-text">Inquiries</span>
+                </a>
+                <a href="reviews.html" class="menu-item">
+                    <i data-lucide="star"></i>
+                    <span class="menu-text">Reviews</span>
+                </a>
+
+                <div class="menu-label">System</div>
+                <a href="settings.html" class="menu-item">
+                    <i data-lucide="settings"></i>
+                    <span class="menu-text">Settings</span>
+                </a>
+                <a href="login.html" class="menu-item">
+                    <i data-lucide="log-out"></i>
+                    <span class="menu-text">Logout</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <!-- Topbar (same as index) -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="toggle-sidebar" id="toggle-sidebar">
+                        <i data-lucide="menu"></i>
+                    </button>
+                    <div class="search-bar">
+                        <i data-lucide="search"></i>
+                        <input type="text" placeholder="Search bookings...">
+                    </div>
+                </div>
+                
+                <div class="topbar-right">
+                    <button class="topbar-btn" id="theme-toggle"><i data-lucide="moon"></i></button>
+                    <div class="profile-dropdown">
+                        <img src="https://ui-avatars.com/api/?name=Admin+User&background=4A5D23&color=fff" alt="Admin" class="avatar">
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-content">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Bookings</h1>
+                        <p class="page-subtitle">Manage upcoming, active, and past bookings.</p>
+                    </div>
+                    <button class="btn btn-primary">
+                        <i data-lucide="plus"></i> Create Booking
+                    </button>
+                </div>
+
+                <div class="card">
+                    <div class="tabs">
+                        <div class="tab active">All Bookings</div>
+                        <div class="tab">Upcoming</div>
+                        <div class="tab">Active (Checked In)</div>
+                        <div class="tab">Completed</div>
+                        <div class="tab">Cancelled</div>
+                    </div>
+
+                    <div class="filter-bar">
+                        <select class="filter-select">
+                            <option>Any Type</option>
+                            <option>Staycation</option>
+                            <option>Corporate</option>
+                            <option>Wedding</option>
+                        </select>
+                        <select class="filter-select">
+                            <option>This Month</option>
+                            <option>Next Month</option>
+                            <option>This Year</option>
+                        </select>
+                        <div style="flex-grow: 1;"></div>
+                        <button class="btn btn-secondary">
+                            <i data-lucide="filter" width="16"></i> More Filters
+                        </button>
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Booking ID</th>
+                                    <th>Guest</th>
+                                    <th>Dates</th>
+                                    <th>Type / Guests</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Check-in Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight: 600;">#BKG-1045</td>
+                                    <td>
+                                        <div class="user-cell">
+                                            <div class="profile-info">
+                                                <span class="profile-name">Rahul Sharma</span>
+                                                <span class="profile-role">rahul@example.com</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>12 Oct - 14 Oct 2026</div>
+                                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;"><i data-lucide="moon" width="12" style="display:inline; vertical-align:text-bottom;"></i> 2 Nights</div>
+                                    </td>
+                                    <td>
+                                        <div>Staycation</div>
+                                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;"><i data-lucide="users" width="12" style="display:inline; vertical-align:text-bottom;"></i> 4 Guests</div>
+                                    </td>
+                                    <td>₹50,000</td>
+                                    <td><span class="status-badge status-warning">Upcoming</span></td>
+                                    <td><span class="status-badge" style="background-color: var(--border-color); color: var(--text-muted);">Not Arrived</span></td>
+                                    <td>
+                                        <button class="action-menu"><i data-lucide="eye" width="16"></i></button>
+                                        <button class="action-menu"><i data-lucide="edit" width="16"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 600;">#BKG-1044</td>
+                                    <td>
+                                        <div class="user-cell">
+                                            <div class="profile-info">
+                                                <span class="profile-name">Amit Patel</span>
+                                                <span class="profile-role">amit.p@example.com</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>08 Oct - 10 Oct 2026</div>
+                                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;"><i data-lucide="moon" width="12" style="display:inline; vertical-align:text-bottom;"></i> 2 Nights</div>
+                                    </td>
+                                    <td>
+                                        <div>Corporate Offsite</div>
+                                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;"><i data-lucide="users" width="12" style="display:inline; vertical-align:text-bottom;"></i> 10 Guests</div>
+                                    </td>
+                                    <td>₹75,000</td>
+                                    <td><span class="status-badge status-success">Active</span></td>
+                                    <td><span class="status-badge status-success">Checked-in</span></td>
+                                    <td>
+                                        <button class="action-menu"><i data-lucide="eye" width="16"></i></button>
+                                        <button class="action-menu"><i data-lucide="edit" width="16"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 600;">#BKG-1043</td>
+                                    <td>
+                                        <div class="user-cell">
+                                            <div class="profile-info">
+                                                <span class="profile-name">Sneha Reddy</span>
+                                                <span class="profile-role">sneha.r@example.com</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>01 Oct - 03 Oct 2026</div>
+                                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;"><i data-lucide="moon" width="12" style="display:inline; vertical-align:text-bottom;"></i> 2 Nights</div>
+                                    </td>
+                                    <td>
+                                        <div>Staycation</div>
+                                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;"><i data-lucide="users" width="12" style="display:inline; vertical-align:text-bottom;"></i> 6 Guests</div>
+                                    </td>
+                                    <td>₹55,000</td>
+                                    <td><span class="status-badge status-info" style="background-color: var(--border-color); color: var(--text-muted);">Completed</span></td>
+                                    <td><span class="status-badge status-danger" title="Guest did not arrive" style="cursor: help;">No-show</span></td>
+                                    <td>
+                                        <button class="action-menu"><i data-lucide="eye" width="16"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="pagination">
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Showing 1 to 3 of 42 entries</div>
+                        <div class="page-numbers">
+                            <button class="page-btn"><i data-lucide="chevron-left" width="16"></i></button>
+                            <button class="page-btn active">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <button class="page-btn"><i data-lucide="chevron-right" width="16"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>

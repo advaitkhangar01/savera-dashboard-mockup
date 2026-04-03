@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inquiries | Savera Retreat Admin</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="brand-logo">
+                    <i data-lucide="leaf"></i>
+                    <span class="brand-text">Savera Retreat</span>
+                </a>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <div class="menu-label">Overview</div>
+                <a href="index.html" class="menu-item">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span class="menu-text">Dashboard</span>
+                </a>
+                <a href="analytics.html" class="menu-item">
+                    <i data-lucide="bar-chart-3"></i>
+                    <span class="menu-text">Analytics</span>
+                </a>
+
+                <div class="menu-label">Management</div>
+                <a href="bookings.html" class="menu-item">
+                    <i data-lucide="calendar-check"></i>
+                    <span class="menu-text">Bookings</span>
+                </a>
+                <a href="calendar.html" class="menu-item">
+                    <i data-lucide="calendar-days"></i>
+                    <span class="menu-text">Calendar</span>
+                </a>
+                <a href="customers.html" class="menu-item">
+                    <i data-lucide="users"></i>
+                    <span class="menu-text">Customers</span>
+                </a>
+
+                <div class="menu-label">Interactions</div>
+                <a href="inquiries.html" class="menu-item active">
+                    <i data-lucide="message-square"></i>
+                    <span class="menu-text">Inquiries</span>
+                </a>
+                <a href="reviews.html" class="menu-item">
+                    <i data-lucide="star"></i>
+                    <span class="menu-text">Reviews</span>
+                </a>
+
+                <div class="menu-label">System</div>
+                <a href="settings.html" class="menu-item">
+                    <i data-lucide="settings"></i>
+                    <span class="menu-text">Settings</span>
+                </a>
+                <a href="login.html" class="menu-item">
+                    <i data-lucide="log-out"></i>
+                    <span class="menu-text">Logout</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="toggle-sidebar" id="toggle-sidebar"><i data-lucide="menu"></i></button>
+                    <div class="search-bar">
+                        <i data-lucide="search"></i>
+                        <input type="text" placeholder="Search inquiries...">
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-content">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Inquiry Management</h1>
+                        <p class="page-subtitle">Track custom requests, event queries, and convert leads.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>Inquiry Type</th>
+                                    <th>Message Preview</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="color: var(--text-muted);">Today, 10:30 AM</td>
+                                    <td style="font-weight: 600;">Karan Singhania</td>
+                                    <td><span class="status-badge" style="background: var(--bg-hover); color: var(--text-main);">Wedding Event</span></td>
+                                    <td style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                        Looking to host a small wedding for 50 people in December...
+                                    </td>
+                                    <td><span class="status-badge status-danger">New Lead</span></td>
+                                    <td>
+                                        <button class="btn btn-primary" style="padding: 4px 8px; font-size: 0.8rem;">Reply</button>
+                                        <button class="action-menu"><i data-lucide="check" width="16"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="color: var(--text-muted);">Yesterday</td>
+                                    <td style="font-weight: 600;">Pooja Das</td>
+                                    <td><span class="status-badge" style="background: var(--bg-hover); color: var(--text-main);">Photoshoot</span></td>
+                                    <td style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                        Hi, what are the charges for a pre-wedding shoot for half a day?
+                                    </td>
+                                    <td><span class="status-badge status-warning">In Progress</span></td>
+                                    <td>
+                                        <button class="btn btn-primary" style="padding: 4px 8px; font-size: 0.8rem;">Reply</button>
+                                        <button class="action-menu"><i data-lucide="check" width="16"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="color: var(--text-muted);">Oct 01</td>
+                                    <td style="font-weight: 600;">Rishabh Jain</td>
+                                    <td><span class="status-badge" style="background: var(--bg-hover); color: var(--text-main);">Stay Booking</span></td>
+                                    <td style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                        Is the pool private for the villa guests only?
+                                    </td>
+                                    <td><span class="status-badge status-success">Converted</span></td>
+                                    <td>
+                                        <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.8rem;">View</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
