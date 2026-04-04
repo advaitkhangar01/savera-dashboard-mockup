@@ -1,0 +1,1 @@
+This is a MOCK-UP Website, given for dashboard understanding. The dashboard represents several sections related to booking, customer, stay time length, financials and various other informational metrics which help to understand a quick overview of the required software. 
